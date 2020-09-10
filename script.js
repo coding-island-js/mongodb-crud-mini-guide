@@ -1,4 +1,4 @@
-upconst customerListElement = document.getElementById("customer-list");
+const customerListElement = document.getElementById("customer-list");
 const emailListElement = document.getElementById("email-list");
 const url = "http://localhost:3000/customer";
 
