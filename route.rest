@@ -1,0 +1,27 @@
+GET http://localhost:3000/customer
+
+###
+
+GET http://localhost:3000/customer/5f5a6b20010b0d277902b12e
+
+###
+
+POST http://localhost:3000/customer
+Content-Type: application/json
+
+{
+"name": "Adam JAmes", "email": "adam.james@test.com"
+}
+
+###
+
+DELETE http://localhost:3000/customer/5f5a6b20010b0d277902b12e
+
+###
+
+PATCH http://localhost:3000/customer/5f5a6b44010b0d277902b12f
+Content-Type: application/json
+
+{
+"name": "Adam James"
+}
