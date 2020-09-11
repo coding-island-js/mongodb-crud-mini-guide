@@ -4,6 +4,32 @@ const url = "http://localhost:3000/customer";
 
 getCustomerCollection();
 
+async function getCustomerCollection() {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+    });
+    const data = await response.json();
+    printHTML(JSON.stringify(data));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function printHTML(data) {
+  let parseData = JSON.parse(data);
+  for (let i = 0; i < parseData.length; i++) {
+    let customer = document.createElement("p");
+    let email = document.createElement("p");
+    customer.innerText = parseData[i].name;
+    email.innerText = parseData[i].email;
+    customerListElement.appendChild(customer);
+    emailListElement.appendChild(email);
+  }
+}
+
+/*
+
 function getCustomerCollection() {
   fetch(url, {
     method: "GET",
@@ -15,7 +41,6 @@ function getCustomerCollection() {
     .catch((error) => console.error(error));
 }
 
-/*
 getCustomerProfile()
   .then((data) => {
     printHTML(JSON.stringify(data));
@@ -39,15 +64,3 @@ async function getCustomerProfile() {
 }
 
 */
-
-function printHTML(data) {
-  let parseData = JSON.parse(data);
-  for (let i = 0; i < parseData.length; i++) {
-    let customerP = document.createElement("p");
-    let emailP = document.createElement("p");
-    customerP.innerText = parseData[i].name;
-    emailP.innerText = parseData[i].email;
-    customerListElement.appendChild(customerP);
-    emailListElement.appendChild(emailP);
-  }
-}

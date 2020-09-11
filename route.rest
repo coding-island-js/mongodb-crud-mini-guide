@@ -10,7 +10,7 @@ POST http://localhost:3000/customer
 Content-Type: application/json
 
 {
-"name": "Jimi Hendrix", "email": "jimih@test.com"
+"name": "Bob Dylan", "email": "bobdylan@test.com"
 }
 
 ###
