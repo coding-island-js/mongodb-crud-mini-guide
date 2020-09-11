@@ -15,6 +15,31 @@ function getCustomerCollection() {
     .catch((error) => console.error(error));
 }
 
+/*
+getCustomerProfile()
+  .then((data) => {
+    printHTML(JSON.stringify(data));
+  })
+  .catch((error) => console.error(error));
+
+
+async function getCustomerProfile() {
+  try {
+    // await response of fetch call
+    let response = await fetch(url, {
+      method: "GET",
+    });
+    // only proceed once promise is resolved
+    let data = await response.json();
+    // only proceed once second promise is resolved
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+*/
+
 function printHTML(data) {
   let parseData = JSON.parse(data);
   for (let i = 0; i < parseData.length; i++) {
