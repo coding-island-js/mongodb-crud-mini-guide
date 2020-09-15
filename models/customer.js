@@ -12,7 +12,14 @@ const CustomerSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  address: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Address",
+    },
+  ],
 });
+
 
 const Customers = mongoose.model("Customers", CustomerSchema);
 module.exports = Customers;

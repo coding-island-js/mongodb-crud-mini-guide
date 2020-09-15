@@ -1,5 +1,7 @@
 const express = require("express");
 const customerModel = require("../models/customer");
+const crudModel = require("../models");
+const { populate } = require("../models/customer");
 const app = express();
 
 //get all
@@ -36,6 +38,19 @@ app.post("/customer", async (req, res) => {
   }
 });
 
+//add new address and new customer
+app.post("/customer/:id", async (req, res) => {
+  const address = await crudModel.Address.create(req.body);
+  const customer = await crudModel.Customer.findByIdAndUpdate(req.params.id, req.body);
+
+  try {
+    await customer.save();
+    res.send(address);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 //delete one
 app.delete("/customer/:id", async (req, res) => {
   try {
@@ -48,6 +63,7 @@ app.delete("/customer/:id", async (req, res) => {
 });
 
 //update one
+
 app.patch("/customer/:id", async (req, res) => {
   try {
     await customerModel.findByIdAndUpdate(req.params.id, req.body);

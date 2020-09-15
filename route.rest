@@ -2,7 +2,8 @@ GET http://localhost:3000/customer
 
 ###
 
-GET http://localhost:3000/customer/5f5a6b20010b0d277902b12e
+GET http://localhost:3000/customer/5f5a6b44010b0d277902b12f
+
 
 ###
 
@@ -24,4 +25,13 @@ Content-Type: application/json
 
 {
 "name": "Adam James"
+}
+
+###
+
+POST http://localhost:3000/customer/5f5a6b44010b0d277902b12f
+Content-Type: application/json
+
+{
+"address": "111 Way, Hawaii"
 }
