@@ -1,7 +1,6 @@
 const express = require("express");
 const customerModel = require("../models/customer");
 const crudModel = require("../models");
-const { populate } = require("../models/customer");
 const app = express();
 
 //get all
@@ -15,15 +14,45 @@ app.get("/customer", async (req, res) => {
   }
 });
 
+//get all address
+app.get("/address", async (req, res) => {
+  const address = await crudModel.Address.find({});
+
+  try {
+    res.send(address);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+/*
 //get one
 app.get("/customer/:id", async (req, res) => {
-  const customer = await customerModel.findById(req.params.id);
+  const customer = await crudModel.Customer.findById(req.params.id);
+  customer.populate("address");
 
   try {
     res.send(customer);
   } catch (error) {
     res.status(500).send(error);
   }
+});
+*/
+
+// Route for retrieving a Product by id and populating it's Review.
+app.get("/customer/:id", function (req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  crudModel.Customer.findById({ _id: req.params.id })
+    // ..and populate all of the notes associated with it
+    .populate("address")
+    .then(function (dbCustomer) {
+      // If we were able to successfully find an Product with the given id, send it back to the client
+      res.json(dbCustomer);
+    })
+    .catch(function (err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
 
 //add new
@@ -41,11 +70,15 @@ app.post("/customer", async (req, res) => {
 //add new address and new customer
 app.post("/customer/:id", async (req, res) => {
   const address = await crudModel.Address.create(req.body);
-  const customer = await crudModel.Customer.findByIdAndUpdate(req.params.id, req.body);
+  const customer = await crudModel.Customer.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $push: { address: address } },
+    { new: true }
+  );
 
   try {
     await customer.save();
-    res.send(address);
+    res.send(customer);
   } catch (error) {
     res.status(500).send(error);
   }

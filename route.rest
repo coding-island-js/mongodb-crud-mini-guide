@@ -2,7 +2,11 @@ GET http://localhost:3000/customer
 
 ###
 
-GET http://localhost:3000/customer/5f5a6b44010b0d277902b12f
+GET http://localhost:3000/address
+
+###
+
+GET http://localhost:3000/customer/5f60db5e0b9ed40b541666be
 
 
 ###
@@ -11,12 +15,12 @@ POST http://localhost:3000/customer
 Content-Type: application/json
 
 {
-"name": "Bob Dylan", "email": "bobdylan@test.com"
+"name": "James Brown", "email": "jamesbrown@test.com"
 }
 
 ###
 
-DELETE http://localhost:3000/customer/5f5a6b20010b0d277902b12e
+DELETE http://localhost:3000/customer/5f5a6b44010b0d277902b12f
 
 ###
 
@@ -29,9 +33,9 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/customer/5f5a6b44010b0d277902b12f
+POST http://localhost:3000/customer/5f60db5e0b9ed40b541666be
 Content-Type: application/json
 
 {
-"address": "111 Way, Hawaii"
+"address": "Irvine, CA"
 }
