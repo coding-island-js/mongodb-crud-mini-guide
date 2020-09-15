@@ -29,10 +29,10 @@ app.get("/address", async (req, res) => {
 //get one
 app.get("/customer/:id", async (req, res) => {
   const customer = await crudModel.Customer.findById(req.params.id);
-  customer.populate("address");
+  const customerAddress = customer.populate("address");
 
   try {
-    res.send(customer);
+    res.send(customerAddress);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -47,11 +47,11 @@ app.get("/customer/:id", function (req, res) {
     .populate("address")
     .then(function (dbCustomer) {
       // If we were able to successfully find an Product with the given id, send it back to the client
-      res.json(dbCustomer);
+      res.send(dbCustomer);
     })
-    .catch(function (err) {
+    .catch(function (error) {
       // If an error occurred, send it to the client
-      res.json(err);
+      res.send(error);
     });
 });
 

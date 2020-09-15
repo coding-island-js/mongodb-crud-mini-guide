@@ -37,5 +37,5 @@ POST http://localhost:3000/customer/5f60db5e0b9ed40b541666be
 Content-Type: application/json
 
 {
-"address": "Irvine, CA"
+"address": "Torrance, CA"
 }
