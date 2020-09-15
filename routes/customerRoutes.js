@@ -25,39 +25,10 @@ app.get("/address", async (req, res) => {
   }
 });
 
-/*
 //get one
 app.get("/customer/:id", async (req, res) => {
   const customer = await crudModel.Customer.findById(req.params.id);
-  const customerAddress = customer.populate("address");
-
-  try {
-    res.send(customerAddress);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-*/
-
-// Route for retrieving a Product by id and populating it's Review.
-app.get("/customer/:id", function (req, res) {
-  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  crudModel.Customer.findById({ _id: req.params.id })
-    // ..and populate all of the notes associated with it
-    .populate("address")
-    .then(function (dbCustomer) {
-      // If we were able to successfully find an Product with the given id, send it back to the client
-      res.send(dbCustomer);
-    })
-    .catch(function (error) {
-      // If an error occurred, send it to the client
-      res.send(error);
-    });
-});
-
-//add new
-app.post("/customer", async (req, res) => {
-  const customer = new customerModel(req.body);
+  customer.populate("address").execPopulate();
 
   try {
     await customer.save();
@@ -67,7 +38,26 @@ app.post("/customer", async (req, res) => {
   }
 });
 
-//add new address and new customer
+//add new
+app.post("/customer", async (req, res) => {
+  const customer = new crudModel.Customer(req.body);
+  const address = new crudModel.Address(req.body);
+
+  try {
+    await customer.save();
+  //  res.send(customer);
+ //   await crudModel.Customer.findByIdAndUpdate(
+  //    { _id: req.params.id },
+    //  { $push: { address: address } },
+  //    { new: true }
+  //  );
+    res.send(customer);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+//add new address to existing customer
 app.post("/customer/:id", async (req, res) => {
   const address = await crudModel.Address.create(req.body);
   const customer = await crudModel.Customer.findByIdAndUpdate(
