@@ -5,7 +5,7 @@ const app = express();
 
 //get all
 app.get("/customer", async (req, res) => {
-  const customer = await customerModel.find({});
+  const customer = await crudModel.Customer.find({});
 
   try {
     res.send(customer);
@@ -45,12 +45,12 @@ app.post("/customer", async (req, res) => {
 
   try {
     await customer.save();
-  //  res.send(customer);
- //   await crudModel.Customer.findByIdAndUpdate(
-  //    { _id: req.params.id },
+    //  res.send(customer);
+    //   await crudModel.Customer.findByIdAndUpdate(
+    //    { _id: req.params.id },
     //  { $push: { address: address } },
-  //    { new: true }
-  //  );
+    //    { new: true }
+    //  );
     res.send(customer);
   } catch (error) {
     res.status(500).send(error);

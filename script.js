@@ -1,5 +1,6 @@
 const customerListElement = document.getElementById("customer-list");
 const emailListElement = document.getElementById("email-list");
+const addressListElement = document.getElementById("customer-address");
 const url = "http://localhost:3000/customer";
 
 getCustomerCollection();
@@ -16,6 +17,8 @@ async function getCustomerCollection() {
   }
 }
 
+
+
 function printHTML(data) {
   let parseData = JSON.parse(data);
   for (let i = 0; i < parseData.length; i++) {
@@ -25,6 +28,8 @@ function printHTML(data) {
     email.innerText = parseData[i].email;
     customerListElement.appendChild(customer);
     emailListElement.appendChild(email);
+    //display address on html
+    // addressListElement.appendChild(address);
   }
 }
 
